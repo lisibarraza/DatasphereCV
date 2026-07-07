@@ -1,0 +1,15 @@
+FUNCTION SF_AGENCY_ID(V_AGCY_NAME NVARCHAR(25))
+RETURNS AGCY_ID NVARCHAR(8)
+AS
+BEGIN
+DECLARE var_Agcy_Id NVARCHAR(8);
+DECLARE var_Agcy_Like NVARCHAR(26);
+
+    var_Agcy_Like = :V_AGCY_NAME || '%';
+     
+    SELECT AGENCYNUM INTO var_Agcy_Id
+    FROM "V_STRAVELAG"
+    WHERE NAME LIKE :var_Agcy_Like;
+
+    AGCY_ID := var_Agcy_Id;
+END

@@ -1,0 +1,159 @@
+
+
+####
+#
+#Browse Airports
+#
+
+GET http://localhost:4004/odata/v4/catalog/Airport
+
+###
+#Browse for specific Airport
+
+GET http://localhost:4004/odata/v4/catalog/Airport('MDE')
+
+###
+#Adding Airport 
+
+POST http://localhost:4004/odata/v4/catalog/Airport
+Content-Type: application/json
+
+{    
+    "ID": "MDE",
+    "MANDT" : "300",
+    "NAME": "Medellín, Colombia",
+    "TIME_ZONE": "UTC-5"
+}
+
+###
+#Borrado
+#
+DELETE http://localhost:4004/odata/v4/catalog/Airport('BOG')
+
+###
+#Update
+#
+PATCH  http://localhost:4004/odata/v4/catalog/Airport('MDE')
+Content-Type: application/json
+
+{
+    "ID": "MDE",
+    "MANDT" : "300",
+    "NAME": "Medellín, Colombia SA",
+    "TIME_ZONE": "UTC-5"
+}
+
+###
+#Get Airport
+#
+
+GET http://localhost:4004/odata/v4/catalog/Airplane
+
+###
+#Get Airplane by ID
+#
+GET http://localhost:4004/odata/v4/catalog/Airplane('146-200')
+
+###
+#Get Airport Location
+#
+
+GET http://localhost:4004/odata/v4/catalog/AirportLocation
+
+###
+#Get GeoLocation
+#
+GET http://localhost:4004/odata/v4/catalog/GeoLocation
+
+###
+#Create new Geolocation
+#
+POST http://localhost:4004/odata/v4/catalog/GeoLocation
+Content-Type: application/json
+
+{    
+    "CITY": "SANTA MARTA",
+    "COUNTRY" : "CO",
+    "LATITUDE": "11.1179",
+    "LONGITUDE": "-74.2318"
+}
+
+###
+#
+#
+
+GET http://localhost:4004/odata/v4/catalog/GeoLocation(CITY='BOGOTA',COUNTRY='CO')
+
+###
+#Agency
+#
+GET http://localhost:4004/odata/v4/catalog/Agency
+
+###
+#Service Get 
+#
+
+### Get Agency Sales Data
+GET http://localhost:4004/odata/v4/catalog/getAgencySales(AGENCY_NUM='00000114',Date_From=2009-09-30,Date_To=2010-01-01)
+
+###
+#
+#
+GET http://localhost:4004/odata/v4/catalog/getAgency(AGENCY_NUM='00000114')
+
+###
+#
+#
+GET http://localhost:4004/odata/v4/catalog/Customer
+
+###
+#Testing the 
+#
+GET http://localhost:4004/odata/v4/catalog/getDatesRptSales
+
+###
+#Test SP
+#
+POST  http://localhost:4004/odata/v4/catalog/fillAgencySales(V_DATE_FROM='2010-01',V_DATE_TO='2011-01')
+
+###
+#GET CITIES
+#
+GET http://localhost:4004/odata/v4/catalog/City
+
+###
+#GET CITY CALLED
+#
+GET http://localhost:4004/odata/v4/catalog/City(CITY='COCHABAMBA',COUNTRY='BO',AIRPORT='CBB')
+
+###
+#POST A CITY
+#
+POST http://localhost:4004/odata/v4/catalog/City
+Content-Type: application/json
+
+{   
+    "AIRPORT": "CBB", 
+    "CITY": "COCHABAMBA",
+    "COUNTRY" : "BO",    
+    "MASTERCITY": "COCHABAMBA"
+}
+
+###
+#Update
+#
+PATCH  http://localhost:4004/odata/v4/catalog/City(CITY='COCHABAMBA',COUNTRY='BO',AIRPORT='CBB')
+Content-Type: application/json
+
+{
+    "AIRPORT": "CBB", 
+    "CITY": "COCHABAMBA",
+    "COUNTRY" : "BO",    
+    "MASTERCITY": "COCHABAMBA",
+    "MANDANT" : "300"
+}
+
+###
+# Get  Airport Geo
+#
+GET http://localhost:4004/odata/v4/catalog/getAirportGeoData

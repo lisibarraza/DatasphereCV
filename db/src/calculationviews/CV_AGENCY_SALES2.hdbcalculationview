@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_AGENCY_SALES2" applyPrivilegeType="NONE" dataCategory="CUBE" dimensionType="STANDARD" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Projection" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CV_AGENCY_SALES2"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="AGCY_SALES_YEAR">
+    <resourceUri>AGCY_SALES_YEAR</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews/>
+<logicalModel id="AGCY_SALES_YEAR">
+  <attributes>
+    <attribute id="AGENCY_ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="AGCY_SALES_YEAR" columnName="ID"/>
+    </attribute>
+    <attribute id="AGENCY_NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="AGCY_SALES_YEAR" columnName="NAME"/>
+    </attribute>
+    <attribute id="CURRENCY" order="4" displayAttribute="false" attributeHierarchyActive="false" semanticType="currencyCode">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="AGCY_SALES_YEAR" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="YEAR" order="5" displayAttribute="false" attributeHierarchyActive="false" semanticType="empty">
+      <descriptions defaultDescription="YEAR_ORDER"/>
+      <keyMapping columnObjectName="AGCY_SALES_YEAR" columnName="YEAR_ORDER"/>
+    </attribute>
+    <attribute id="MONTH" order="6" displayAttribute="false" attributeHierarchyActive="false" semanticType="empty">
+      <descriptions defaultDescription="MONTH_ORDER"/>
+      <keyMapping columnObjectName="AGCY_SALES_YEAR" columnName="MONTH_ORDER"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes>
+    <calculatedAttribute id="CC_MONTH_LETTERS" order="7" semanticType="empty" displayAttribute="false" attributeHierarchyActive="false">
+      <keyCalculation datatype="NVARCHAR" expressionLanguage="SQL" length="13">
+        <formula>CASE &quot;MONTH&quot;
+    WHEN '01' THEN 'JAN'
+    WHEN '02' THEN 'FEB'
+    WHEN '03' THEN 'MAR'
+    WHEN '04' THEN 'APR'
+    WHEN '05' THEN 'MAY'
+    WHEN '06' THEN 'JUN'
+    WHEN '07' THEN 'JUL'
+    WHEN '08' THEN 'AUG'
+    WHEN '09' THEN 'SEP'
+    WHEN '10' THEN 'OCT'
+    WHEN '11' THEN 'NOV'
+    WHEN '12' THEN 'DEC'
+    ELSE ''
+END</formula>
+      </keyCalculation>
+    </calculatedAttribute>
+  </calculatedAttributes>
+  <baseMeasures>
+    <measure id="SALES" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="AMOUNT"/>
+      <measureMapping columnObjectName="AGCY_SALES_YEAR" columnName="AMOUNT"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="92" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

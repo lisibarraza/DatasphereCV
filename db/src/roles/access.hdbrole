@@ -1,0 +1,17 @@
+{
+  "role": {
+    "name": "access1",
+    "object_privileges": [
+      {
+        "name": "CV_AGENCY_MAP2", 
+        "type": "VIEW",
+        "privileges": [ "SELECT" ]
+      },
+      {
+        "name": "CV_AGENCY_SALES2", 
+        "type": "VIEW",
+        "privileges": [ "SELECT" ]
+      }
+    ]
+  }
+}

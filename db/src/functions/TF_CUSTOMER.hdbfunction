@@ -1,0 +1,37 @@
+FUNCTION TF_CUSTOMER(V_CUST_ID NVARCHAR(25))
+RETURNS TABLE (ID NVARCHAR(8),
+        NAME NVARCHAR(25),
+        FORM NVARCHAR(15),
+        STREET NVARCHAR(30),
+        POSTBOX NVARCHAR(10),
+        POSTCODE NVARCHAR(10),
+        CITY NVARCHAR(25),
+        COUNTRY NVARCHAR(3),
+        REGION NVARCHAR(3),
+        TELEPHONE NVARCHAR(30),
+        CUSTTYPE NVARCHAR(1),
+        DISCOUNT NVARCHAR(3),
+        LANGU NVARCHAR(1),
+        EMAIL NVARCHAR(40)
+)
+AS
+BEGIN
+    RETURN     
+    SELECT ID,
+        NAME,
+        FORM,
+        STREET,
+        POSTBOX,
+        POSTCODE,
+        CITY,
+        COUNTRY,
+        REGION,
+        TELEPHONE,
+        CUSTTYPE,
+        DISCOUNT,
+        LANGU,
+        EMAIL
+    FROM "V_SCUSTOM"
+    WHERE ID = :V_CUST_ID
+    ORDER BY NAME ASC;
+END

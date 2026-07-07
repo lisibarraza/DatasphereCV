@@ -1,0 +1,15 @@
+FUNCTION SF_CUSTOMER(V_CUST_NAME NVARCHAR(25))
+RETURNS CUST_ID NVARCHAR(20)
+AS
+BEGIN
+DECLARE var_Cust_Id NVARCHAR(8);
+DECLARE var_Cust_Like NVARCHAR(26);
+
+    var_Cust_Like = :V_CUST_NAME || '%';
+     
+    SELECT ID INTO var_Cust_Id
+    FROM "V_SCUSTOM"
+    WHERE NAME LIKE :var_Cust_Like;
+
+    CUST_ID := var_Cust_Id;
+END

@@ -1,0 +1,29 @@
+FUNCTION TF_Airport_Location (IN V_COUNTRY NVARCHAR(2))
+RETURNS TABLE(
+    ID NVARCHAR(3),
+    CITY NVARCHAR(20),
+    COUNTRY_NAME NVARCHAR(280),
+    TIME_ZONE NVARCHAR(6),
+    LATITUDE DOUBLE,
+    LONGITUDE DOUBLE
+ )
+AS
+BEGIN
+    declare v_country_name NVARCHAR(280);
+
+    SELECT TOP 1 COUNTRY_NAME INTO v_country_name FROM "V_COUNTRY" WHERE COUNTRY = :V_COUNTRY;
+
+    lt_airport_location_map = SELECT ID, CITY, COUNTRY_NAME, TIME_ZONE, LATITUDE, LONGITUDE FROM "V_AIRPORT_LOCATION" Where COUNTRY_NAME = :v_country_name;
+
+    RETURN 
+        SELECT 
+            ID, 
+            CITY, 
+            COUNTRY_NAME, 
+            TIME_ZONE, 
+            LATITUDE, 
+            LONGITUDE 
+        FROM "V_AIRPORT_LOCATION"
+        WHERE COUNTRY_NAME = :v_country_name
+          AND :v_country_name IS NOT NULL; 
+END;

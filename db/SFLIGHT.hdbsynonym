@@ -1,0 +1,152 @@
+{
+  "SYN_SAPLANE": {
+    "target": {
+      "object": "SAPLANE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SAIRPORT": {
+    "target": {
+      "object": "SAIRPORT",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SBOOK": {
+    "target": {
+      "object": "SBOOK",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SBUSPART": {
+    "target": {
+      "object": "SBUSPART",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCARPLAN": {
+    "target": {
+      "object": "SCARPLAN",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCARR": {
+    "target": {
+      "object": "SCARR",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCITAIRP": {
+    "target": {
+      "object": "SCITAIRP",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCOUNTER": {
+    "target": {
+      "object": "SCOUNTER",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCPLANE": {
+    "target": {
+      "object": "SCPLANE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCURR": {
+    "target": {
+      "object": "SCURR",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCURX": {
+    "target": {
+      "object": "SCURX",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SCUSTOM": {
+    "target": {
+      "object": "SCUSTOM",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SDESSERT": {
+    "target": {
+      "object": "SDESSERT",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SFLIGHT": {
+    "target": {
+      "object": "SFLIGHT",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SGEOCITY": {
+    "target": {
+      "object": "SGEOCITY",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SMACOURSE": {
+    "target": {
+      "object": "SMACOURSE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SMEAL": {
+    "target": {
+      "object": "SMEAL",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SMEALT": {
+    "target": {
+      "object": "SMEALT",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SMENU": {
+    "target": {
+      "object": "SMENU",
+      "schema": "SFLIGHT"
+    }
+  },  
+  "SYN_SNVOICE": {
+    "target": {
+      "object": "SNVOICE",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SPFLI": {
+    "target": {
+      "object": "SPFLI",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_SSTARTER": {
+    "target": {
+      "object": "SSTARTER",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_STICKET": {
+    "target": {
+      "object": "STICKET",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_STRAVELAG": {
+    "target": {
+      "object": "STRAVELAG",
+      "schema": "SFLIGHT"
+    }
+  },
+  "SYN_COUNTRY": {
+    "target": {
+      "object": "COUNTRY",
+      "schema": "SFLIGHT"
+    }
+  }
+}

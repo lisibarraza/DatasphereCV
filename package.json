@@ -1,0 +1,56 @@
+{
+  "name": "DataSphereCV",
+  "version": "1.0.0",
+  "dependencies": {
+    "@cap-js/hana": "^2.8.0",
+    "@sap/cds": "^9",
+    "@sap/xssec": "^4.13.1"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^2.4",
+    "@sap/cds-dk": "^9",
+    "cds-plugin-ui5": "^0.17.0",
+    "mbt": "^1.2.49",
+    "rimraf": "^5.0.5"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-custom_view_airport": "cds watch --open customviewairport/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "undeploy": "cf undeploy DataSphereCV --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
+    "watch-view_map_airports": "cds watch --open viewmapairports/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-view_rep_sales_agcy": "cds watch --open viewrepsalesagcy/index.html?sap-ui-xx-viewCache=false --livereload false",
+    "watch-view_custom_airport": "cds watch --open viewcustomairport/index.html?sap-ui-xx-viewCache=false --livereload false"
+  },
+  "private": true,
+  "cds": {
+    "requires": {
+      "[production]": {
+        "db": "hana",
+        "hana": {
+          "deploy-format": "hdbtable"
+        },
+        "auth": "mocked"
+      },
+      "html5-repo": true,
+      "destinations": true,
+      "workzone": true
+    },
+    "odata": {
+      "version": "V4"
+    },
+    "services": {
+      "CatalogService": {
+        "kind": "odata",
+        "path": "/odata/v4/catalog"
+      }
+    }
+  },
+  "workspaces": [
+    "app/*"
+  ],
+  "sapux": [
+    "app/view_rep_sales_agcy"
+  ]
+}

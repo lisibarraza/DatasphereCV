@@ -1,0 +1,182 @@
+{
+	"_version": "1.86.0",
+	"sap.app": {
+		"id": "viewrepsalesagcy",
+		"type": "application",
+		"i18n": {
+			"bundleUrl": "i18n/i18n.properties",
+			"supportedLocales": [
+				""
+			]
+		},
+		"applicationVersion": {
+			"version": "0.0.1"
+		},
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"sourceTemplate": {
+			"id": "@sap/generator-fiori:lrop",
+			"version": "1.28.0",
+			"toolsId": "7e38d914-cc53-47d0-ae21-6f7085a422ef"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/odata/v4/catalog/",
+				"type": "OData",
+				"settings": {
+					"annotations": [],
+					"odataVersion": "4.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		}
+	},
+	"sap.ui5": {
+		"flexEnabled": true,
+		"dependencies": {
+			"minUI5Version": "1.149.1",
+			"libs": {
+				"sap.m": {},
+				"sap.ui.core": {},
+				"sap.fe.templates": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "viewrepsalesagcy.i18n.i18n",
+					"supportedLocales": [
+						""
+					]
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true,
+				"settings": {
+					"operationMode": "Server",
+					"autoExpandSelect": true,
+					"earlyRequests": true
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties",
+				"settings": {
+					"supportedLocales": [
+						""
+					]
+				}
+			}
+		},
+		"resources": {
+			"css": []
+		},
+		"routing": {
+			"config": {},
+			"routes": [
+				{
+					"pattern": ":?query:",
+					"name": "AgcySalesYearList",
+					"target": "AgcySalesYearList"
+				},
+				{
+					"pattern": "AgcySalesYear({key}):?query:",
+					"name": "AgcySalesYearObjectPage",
+					"target": "AgcySalesYearObjectPage"
+				}
+			],
+			"targets": {
+				"AgcySalesYearList": {
+					"type": "Component",
+					"id": "AgcySalesYearList",
+					"name": "sap.fe.templates.ListReport",
+					"options": {
+						"settings": {
+							"contextPath": "/AgcySalesYear",
+							"variantManagement": "Page",
+							"navigation": {
+								"AgcySalesYear": {
+									"detail": {
+										"route": "AgcySalesYearObjectPage"
+									}
+								}
+							},
+							"controlConfiguration": {
+								"@com.sap.vocabularies.UI.v1.LineItem": {
+									"tableSettings": {
+										"type": "AnalyticalTable",
+										"selectionMode": "None"
+									}
+								}
+							},
+							"views": {
+								"paths": [
+									{
+										"primary": [
+											{
+												"annotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant"
+											}
+										],
+										"secondary": [
+											{
+												"annotationPath": "com.sap.vocabularies.UI.v1.LineItem"
+											}
+										],
+										"defaultPath": "both"
+									}
+								]
+							}
+						}
+					}
+				},
+				"AgcySalesYearObjectPage": {
+					"type": "Component",
+					"id": "AgcySalesYearObjectPage",
+					"name": "sap.fe.templates.ObjectPage",
+					"options": {
+						"settings": {
+							"editableHeaderContent": false,
+							"contextPath": "/AgcySalesYear"
+						}
+					}
+				}
+			}
+		},
+		"flexBundle": false
+	},
+	"sap.fiori": {
+		"registrationIds": [],
+		"archeType": "analytical"
+	},
+	"sap.fe": {
+		"app": {
+			"enableLazyLoading": true
+		}
+	},
+	"sap.cloud": {
+		"public": true,
+		"service": "DATASPHERECV"
+	}
+}

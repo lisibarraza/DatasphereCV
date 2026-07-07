@@ -1,0 +1,10 @@
+{
+  "CROSS_SCHEMA_SFLIGHT": {
+    "object_owner" : {
+      "roles" : ["USROLE" ]
+    },
+    "application_user" : {
+      "roles" : ["USROLE" ]
+    }
+  }
+}

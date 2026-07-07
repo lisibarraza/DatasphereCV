@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="CV_AGENCY_MAP2" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true" mdsCubeConversionExecution="AT_LOADING_TIME">
+<descriptions defaultDescription="CV_AGENCY_MAP2"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="V_COUNTRY">
+    <resourceUri>V_COUNTRY</resourceUri>
+  </DataSource>
+  <DataSource id="V_SGEOCITY">
+    <resourceUri>V_SGEOCITY</resourceUri>
+  </DataSource>
+  <DataSource id="V_STRAVELAG">
+    <resourceUri>V_STRAVELAG</resourceUri>
+  </DataSource>
+  <DataSource id="AGCY_SALES_YEAR">
+    <resourceUri>AGCY_SALES_YEAR</resourceUri>
+  </DataSource>
+  <DataSource id="TF_GET_GEODATA" type="TABLE_FUNCTION">
+    <resourceUri>TF_GET_GEODATA</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_1" cardinality="CN_N" joinType="leftOuter" multiJoinNode="Join_2" multiJoinCentralTable="V_STRAVELAG" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="COUNTRY_NAME"/>
+      <viewAttribute id="LATITUDE" aggregationType="sum"/>
+      <viewAttribute id="LONGITUDE" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$COUNTRY$COUNTRY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="V_COUNTRY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY_NAME" source="COUNTRY_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COUNTRY$COUNTRY" source="COUNTRY"/>
+    </input>
+    <input node="V_SGEOCITY">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COUNTRY$COUNTRY" source="COUNTRY"/>
+    </input>
+    <joinAttribute name="JOIN$COUNTRY$COUNTRY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_2_2" cardinality="CN_N" joinType="leftOuter" optimizeJoinColumns="false" multiJoinNode="Join_2" multiJoinCentralTable="V_STRAVELAG" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="AGENCYNUM"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="COUNTRY_NAME"/>
+      <viewAttribute id="LATITUDE" aggregationType="sum"/>
+      <viewAttribute id="LONGITUDE" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$CITY$CITY"/>
+      <viewAttribute hidden="true" id="JOIN$COUNTRY$COUNTRY"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="V_STRAVELAG">
+      <mapping xsi:type="Calculation:AttributeMapping" target="AGENCYNUM" source="AGENCYNUM"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CITY$CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COUNTRY$COUNTRY" source="COUNTRY"/>
+    </input>
+    <input node="Join_2_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY_NAME" source="COUNTRY_NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$CITY$CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$COUNTRY$COUNTRY" source="COUNTRY"/>
+    </input>
+    <joinAttribute name="JOIN$CITY$CITY"/>
+    <joinAttribute name="JOIN$COUNTRY$COUNTRY"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="YEAR_ORDER"/>
+      <viewAttribute id="MONTH_ORDER"/>
+      <viewAttribute id="LATITUDE" aggregationType="sum"/>
+      <viewAttribute id="LONGITUDE" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$AGENCYNUM$ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="CC_MONTH_LETTER" datatype="NVARCHAR" length="13" expressionLanguage="SQL">
+        <formula>CASE &quot;MONTH_ORDER&quot;
+    WHEN '01' THEN 'JAN'
+    WHEN '02' THEN 'FEB'
+    WHEN '03' THEN 'MAR'
+    WHEN '04' THEN 'APR'
+    WHEN '05' THEN 'MAY'
+    WHEN '06' THEN 'JUN'
+    WHEN '07' THEN 'JUL'
+    WHEN '08' THEN 'AUG'
+    WHEN '09' THEN 'SEP'
+    WHEN '10' THEN 'OCT'
+    WHEN '11' THEN 'NOV'
+    WHEN '12' THEN 'DEC'
+    ELSE ''
+END</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Join_2_2">
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$AGENCYNUM$ID" source="AGENCYNUM"/>
+    </input>
+    <input node="AGCY_SALES_YEAR">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_ORDER" source="YEAR_ORDER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH_ORDER" source="MONTH_ORDER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$AGENCYNUM$ID" source="ID"/>
+    </input>
+    <joinAttribute name="JOIN$AGENCYNUM$ID"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_3" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="ID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CITY"/>
+      <viewAttribute id="COUNTRY"/>
+      <viewAttribute id="AMOUNT" aggregationType="sum"/>
+      <viewAttribute id="CURRENCY"/>
+      <viewAttribute id="YEAR_ORDER"/>
+      <viewAttribute id="MONTH_ORDER"/>
+      <viewAttribute id="LATITUDE" aggregationType="sum"/>
+      <viewAttribute id="LONGITUDE" aggregationType="sum"/>
+      <viewAttribute id="CC_MONTH_LETTER"/>
+      <viewAttribute id="GEO_POINT_3857"/>
+      <viewAttribute hidden="true" id="JOIN$ID$ID"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="TF_GET_GEODATA">
+      <mapping xsi:type="Calculation:AttributeMapping" target="GEO_POINT_3857" source="GEO_POINT_3857"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+    </input>
+    <input node="Join_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="ID" source="ID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CITY" source="CITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="COUNTRY" source="COUNTRY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="AMOUNT" source="AMOUNT"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CURRENCY" source="CURRENCY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="YEAR_ORDER" source="YEAR_ORDER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="MONTH_ORDER" source="MONTH_ORDER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LATITUDE" source="LATITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="LONGITUDE" source="LONGITUDE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CC_MONTH_LETTER" source="CC_MONTH_LETTER"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$ID$ID" source="ID"/>
+    </input>
+    <joinAttribute name="JOIN$ID$ID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_3">
+  <attributes>
+    <attribute id="ID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="ID"/>
+      <keyMapping columnObjectName="Join_3" columnName="ID"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_3" columnName="NAME"/>
+    </attribute>
+    <attribute id="CITY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CITY"/>
+      <keyMapping columnObjectName="Join_3" columnName="CITY"/>
+    </attribute>
+    <attribute id="COUNTRY" order="4" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="COUNTRY"/>
+      <keyMapping columnObjectName="Join_3" columnName="COUNTRY"/>
+    </attribute>
+    <attribute id="CURRENCY" order="6" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CURRENCY"/>
+      <keyMapping columnObjectName="Join_3" columnName="CURRENCY"/>
+    </attribute>
+    <attribute id="YEAR_ORDER" order="7" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="YEAR_ORDER"/>
+      <keyMapping columnObjectName="Join_3" columnName="YEAR_ORDER"/>
+    </attribute>
+    <attribute id="MONTH_ORDER" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="MONTH_ORDER"/>
+      <keyMapping columnObjectName="Join_3" columnName="MONTH_ORDER"/>
+    </attribute>
+    <attribute id="LATITUDE" order="9" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LATITUDE"/>
+      <keyMapping columnObjectName="Join_3" columnName="LATITUDE"/>
+    </attribute>
+    <attribute id="LONGITUDE" order="10" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="LONGITUDE"/>
+      <keyMapping columnObjectName="Join_3" columnName="LONGITUDE"/>
+    </attribute>
+    <attribute id="CC_MONTH_LETTER" order="11" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CC_MONTH_LETTER"/>
+      <keyMapping columnObjectName="Join_3" columnName="CC_MONTH_LETTER"/>
+    </attribute>
+    <attribute id="GEOLOCATION" order="12" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="GEO_POINT_3857"/>
+      <keyMapping columnObjectName="Join_3" columnName="GEO_POINT_3857"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="AMOUNT" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="AMOUNT"/>
+      <measureMapping columnObjectName="Join_3" columnName="AMOUNT"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="91" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="337"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Join_2_2" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="250"/>
+    </shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape><shape><upperLeftCorner/><rectangleSize/></shape>
+    <shape modelObjectName="AGCY_SALES_YEAR" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="192"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_3" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="TF_GET_GEODATA" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="200"/>
+    </shape>
+    <shape modelObjectName="Join_1" modelObjectNameSpace="Join_3" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="216"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_2" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="91" y="477"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="V_STRAVELAG" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="48" y="34"/>
+      <rectangleSize width="177"/>
+    </shape>
+    <shape modelObjectName="V_COUNTRY" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="644" y="75"/>
+      <rectangleSize width="198"/>
+    </shape>
+    <shape modelObjectName="V_SGEOCITY" modelObjectNameSpace="Join_2" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_2">
+      <upperLeftCorner x="391" y="83"/>
+      <rectangleSize width="170"/>
+    </shape></shapes>
+</layout>
+</Calculation:scenario>

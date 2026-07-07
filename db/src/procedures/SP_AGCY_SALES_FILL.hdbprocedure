@@ -1,0 +1,40 @@
+PROCEDURE "SP_AGCY_SALES_FILL"( IN V_DATE_FROM NVARCHAR(7), IN V_DATE_TO NVARCHAR(7))
+   LANGUAGE SQLSCRIPT
+   SQL SECURITY INVOKER
+   --DEFAULT SCHEMA <default_schema_name>
+   --READS SQL DATA 
+   AS
+BEGIN
+
+DECLARE v_Month_From NVARCHAR(2);
+DECLARE v_Month_To NVARCHAR(2);
+DECLARE v_Year_From NVARCHAR(4);
+DECLARE v_Year_To NVARCHAR(4);
+
+
+ v_Year_From := SUBSTRING(:V_DATE_FROM,0,4);
+ v_Year_To := SUBSTRING(:V_DATE_TO,0,4);
+ v_Month_From := SUBSTRING(:V_DATE_FROM,6,2);
+ v_Month_To := SUBSTRING(:V_DATE_TO,6,2);
+
+    DELETE FROM "AGCY_SALES_YEAR"; 
+
+    TV_MODELO = SELECT 
+                    AGENCYNUM,
+                    AGENCY_NAME,
+                    AMOUNT,
+                    CURRENCY,
+                    YEAR_ORDER,
+                    MONTH_ORDER
+                FROM "TF_AGCY_SALES_YEAR"();
+
+
+    INSERT INTO "AGCY_SALES_YEAR" 
+    SELECT * from :TV_MODELO 
+    WHERE 
+    (YEAR_ORDER > :v_Year_From AND YEAR_ORDER < :v_Year_To) -- Years in between
+    OR (YEAR_ORDER = :v_Year_From AND YEAR_ORDER = :v_Year_To AND MONTH_ORDER BETWEEN :v_Month_From AND :v_Month_To) 
+    OR (YEAR_ORDER = :v_Year_From AND YEAR_ORDER < :v_Year_To AND MONTH_ORDER >= :v_Month_From) 
+    OR (YEAR_ORDER = :v_Year_To AND YEAR_ORDER > :v_Year_From AND MONTH_ORDER <= :v_Month_To);
+
+END;

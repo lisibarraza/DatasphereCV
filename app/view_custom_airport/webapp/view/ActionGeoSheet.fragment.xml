@@ -1,0 +1,8 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+    <ActionSheet id="ActionGeoSheet" title="Actions">
+        <buttons >
+            <Button id="_IDGeoButton2" icon="sap-icon://show" text="View" press="onViewGeoPress" />
+            <Button id="_IDGeoButton4" icon="sap-icon://edit" text="Edit" press="onEditGeoPress" />
+        </buttons>
+    </ActionSheet>
+</core:FragmentDefinition>

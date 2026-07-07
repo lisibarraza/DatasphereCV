@@ -1,0 +1,12 @@
+FUNCTION SF_COUNTRY(V_ID NVARCHAR(2))
+RETURNS RET NVARCHAR(280)
+AS
+BEGIN
+DECLARE var_country_name NVARCHAR(280);
+     
+        SELECT COUNTRY_NAME INTO var_country_name
+        FROM "V_COUNTRY"
+        WHERE COUNTRY = :V_ID;
+
+        RET := var_country_name;
+END

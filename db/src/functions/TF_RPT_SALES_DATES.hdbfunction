@@ -1,0 +1,13 @@
+FUNCTION TF_RPT_SALES_DATES()
+RETURNS TABLE (DATE_FROM DATE,
+    DATE_TO DATE
+)
+AS 
+BEGIN
+    --Returns the Dates min and max from V_SBooks
+    RETURN
+        SELECT 
+            MIN(ORDER_DATE) AS DATE_FROM,
+            MAX(ORDER_DATE) AS DATE_TO
+        FROM "V_SBOOK";
+END
