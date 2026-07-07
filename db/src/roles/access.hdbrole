@@ -11,6 +11,11 @@
         "name": "CV_AGENCY_SALES2", 
         "type": "VIEW",
         "privileges": [ "SELECT" ]
+      },
+      {
+        "name": "AGCY_SALES_YEAR", 
+        "type": "TABLE",
+        "privileges": [ "SELECT" ]
       }
     ]
   }
